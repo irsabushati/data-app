@@ -1,5 +1,5 @@
 import { Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
-import React from 'react';
+import React, { Fragment } from 'react';
 import '../App.css';
 import {useState,useEffect} from 'react';
 import { styled } from '@mui/material/styles';
@@ -53,6 +53,10 @@ export default function Posts() {
       })
     } 
 
+    const deletePost = (id) => {
+      setPosts(posts.filter(posts => posts.id !== id))
+    }
+
   return (
 
     <> 
@@ -69,15 +73,15 @@ export default function Posts() {
         </TableHead>
         <TableBody className='table-body'>
             {posts.map(post => (
-                <StyledTableRow>
-                    <StyledTableCell>{post.title}</StyledTableCell>
-                    <StyledTableCell>{post.body}</StyledTableCell>
-                    <StyledTableCell className='column-3'> 
-                    <Button variant="outlined" color="inherit">Edit</Button>
-                    &nbsp;
-                    <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>Delete</Button>
-                    </StyledTableCell>
-                </StyledTableRow>
+              <StyledTableRow>
+                <StyledTableCell>{post.title}</StyledTableCell>
+                <StyledTableCell>{post.body}</StyledTableCell>
+                <StyledTableCell className='column-3'> 
+                <Button variant="outlined" color="inherit">Edit</Button>
+                &nbsp;
+                <Button variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deletePost(post.id)}>Delete</Button>
+                </StyledTableCell>
+              </StyledTableRow>
             ))}
         </TableBody>
     </Table>
