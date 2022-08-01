@@ -7,6 +7,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddData from './AddData';
+import Edit from './Edit.js';
 
 <link
   rel="stylesheet"
@@ -57,6 +58,7 @@ export default function Posts() {
       setPosts(posts.filter(posts => posts.id !== id))
     }
 
+
   return (
 
     <> 
@@ -72,12 +74,12 @@ export default function Posts() {
             </StyledTableRow>
         </TableHead>
         <TableBody className='table-body'>
-            {posts.map(post => (
+            {posts.map((post,postIndex) => (
               <StyledTableRow>
                 <StyledTableCell>{post.title}</StyledTableCell>
                 <StyledTableCell>{post.body}</StyledTableCell>
                 <StyledTableCell className='column-3'> 
-                <Button variant="outlined" color="inherit">Edit</Button>
+                <Edit setPosts={setPosts} postIndex={postIndex} titleParent={post.title} bodyParent={post.body} ></Edit>
                 &nbsp;
                 <Button variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deletePost(post.id)}>Delete</Button>
                 </StyledTableCell>
